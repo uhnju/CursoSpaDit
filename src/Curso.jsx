@@ -15,6 +15,7 @@ import EjemplosApiRequests from './pages/curso/EjemplosApiRequests';
 import EjemplosStorage from './pages/curso/EjemplosStorage';
 // import EjemplosRouter from './pages/curso/EjemplosRouter';
 // import EjemplosUseParams from './pages/curso/EjemplosUseParams';
+import EjemplosTSX from './pages/curso/EjemplosTSX';
 
 
 import './App.css'
@@ -41,6 +42,7 @@ const Curso = () => {
   <Link to="/EjemplosStorage">🔄 Storage</Link>
   {/* <Link to="/EjemplosRouter" >🚏 React Router</Link> */}
   {/* <Link to="/EjemplosUseParams">🔄 UseParams</Link>u */}
+  <Link to="/EjemplosTSX">🔄 TSX</Link>
 </nav>
 
 {/* Definición de rutas */}
@@ -60,6 +62,7 @@ const Curso = () => {
           <Route path="/EjemplosStorage" element={<EjemplosStorage />} />
           {/* <Route path="/EjemplosRouter" element={<EjemplosRouter />} /> */}
           {/* <Route path="/EjemplosUseParams" element={<EjemplosUseParams />} /> */}
+          <Route path="/EjemplosTSX" element={<EjemplosTSX />} />
         </Routes>
     </Router>
   );
