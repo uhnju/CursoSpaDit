@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 // ✅ 1️⃣ Uso básico de localStorage
 const LocalStorageExample = () => {
@@ -72,23 +72,23 @@ const RemoveLocalStorageExample = () => {
 };
 
 // ✅ 5️⃣ Uso de Cookies con js-cookie
-const CookiesExample = () => {
-  const [cookieValue, setCookieValue] = useState(Cookies.get("theme") || "light");
+// const CookiesExample = () => {
+//   const [cookieValue, setCookieValue] = useState(Cookies.get("theme") || "light");
 
-  const changeTheme = (theme) => {
-    Cookies.set("theme", theme, { expires: 7 });
-    setCookieValue(theme);
-  };
+//   const changeTheme = (theme) => {
+//     Cookies.set("theme", theme, { expires: 7 });
+//     setCookieValue(theme);
+//   };
 
-  return (
-    <div>
-      <h3>5️⃣ Manejo de Cookies con js-cookie</h3>
-      <p>🌍 Tema actual: {cookieValue}</p>
-      <button onClick={() => changeTheme("light")}>Modo Claro</button>
-      <button onClick={() => changeTheme("dark")}>Modo Oscuro</button>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h3>5️⃣ Manejo de Cookies con js-cookie</h3>
+//       <p>🌍 Tema actual: {cookieValue}</p>
+//       <button onClick={() => changeTheme("light")}>Modo Claro</button>
+//       <button onClick={() => changeTheme("dark")}>Modo Oscuro</button>
+//     </div>
+//   );
+// };
 
 // ✅ 6️⃣ Manejo de IndexedDB (Almacenamiento avanzado)
 const IndexedDBExample = () => {
