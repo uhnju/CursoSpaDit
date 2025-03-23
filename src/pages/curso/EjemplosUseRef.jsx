@@ -1,6 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 
-// ✅ 1️⃣ Enfocar un input al montar el componente
+/********************************************
+ * ESCENARIO 1: Enfocar un input al montar
+ ********************************************/
+// Este ejemplo muestra cómo usar `useRef` para acceder directamente
+// a un input y aplicar el método `.focus()` justo cuando el componente se monta.
+// Muy útil para mejorar la experiencia de usuario en formularios.
+
 const AutoFocusInput = () => {
   const inputRef = useRef(null);
 
@@ -11,7 +17,12 @@ const AutoFocusInput = () => {
   return <input ref={inputRef} placeholder="Escribe aquí..." />;
 };
 
-// ✅ 2️⃣ Acceder al valor de un input sin estado
+/********************************************
+ * ESCENARIO 2: Leer el valor de un input sin estado
+ ********************************************/
+// Aquí accedemos al valor del input sin necesidad de usar `useState`.
+// Esto evita renderizados innecesarios, ya que no se actualiza el componente.
+
 const ReadInputValue = () => {
   const inputRef = useRef(null);
 
@@ -27,7 +38,12 @@ const ReadInputValue = () => {
   );
 };
 
-// ✅ 3️⃣ Contador sin renderizados innecesarios
+/********************************************
+ * ESCENARIO 3: Contador sin re-renderizados
+ ********************************************/
+// Con `useRef` podemos guardar un valor mutable entre renders sin provocar un nuevo renderizado.
+// Aquí llevamos la cuenta en consola sin afectar el DOM.
+
 const CounterWithoutRender = () => {
   const count = useRef(0);
   const [render, setRender] = useState(0);
@@ -46,7 +62,11 @@ const CounterWithoutRender = () => {
   );
 };
 
-// ✅ 4️⃣ Acceder al tamaño de un div
+/********************************************
+ * ESCENARIO 4: Medir el ancho de un div
+ ********************************************/
+// `useRef` también nos sirve para medir elementos del DOM como si usáramos `document.querySelector`.
+
 const MeasureDiv = () => {
   const divRef = useRef(null);
   const [width, setWidth] = useState(0);
@@ -62,7 +82,12 @@ const MeasureDiv = () => {
   );
 };
 
-// ✅ 5️⃣ Reproducir / Pausar un video
+/********************************************
+ * ESCENARIO 5: Controlar un vídeo con ref
+ ********************************************/
+// Controlamos un vídeo de forma programática usando `play()` y `pause()`
+// a través de la referencia.
+
 const VideoPlayer = () => {
   const videoRef = useRef(null);
 
@@ -84,7 +109,11 @@ const VideoPlayer = () => {
   );
 };
 
-// ✅ 6️⃣ Animar un elemento con `useRef`
+/********************************************
+ * ESCENARIO 6: Animar un elemento desde JS
+ ********************************************/
+// Manipulamos un estilo directamente con `.style` desde la referencia para animar.
+
 const AnimateBox = () => {
   const boxRef = useRef(null);
 
@@ -100,7 +129,12 @@ const AnimateBox = () => {
   );
 };
 
-// ✅ 7️⃣ Detectar clics fuera de un modal
+/********************************************
+ * ESCENARIO 7: Cerrar modal al hacer clic fuera
+ ********************************************/
+// Este patrón es ideal para componentes como modales o menús flotantes.
+// Comprobamos si el clic ocurrió fuera del elemento referenciado.
+
 const ClickOutsideModal = () => {
   const modalRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -127,7 +161,11 @@ const ClickOutsideModal = () => {
   );
 };
 
-// ✅ 8️⃣ Guardar el valor anterior de un estado
+/********************************************
+ * ESCENARIO 8: Guardar el valor anterior
+ ********************************************/
+// Con `useRef` podemos memorizar un valor anterior sin tener que usar un estado extra.
+
 const PreviousValue = () => {
   const [count, setCount] = useState(0);
   const prevCount = useRef(0);
@@ -145,7 +183,11 @@ const PreviousValue = () => {
   );
 };
 
-// ✅ 9️⃣ Temporizador con `useRef`
+/********************************************
+ * ESCENARIO 9: Temporizador con control manual
+ ********************************************/
+// Se guarda el ID del intervalo en un ref para poder detenerlo fácilmente sin re-render.
+
 const Timer = () => {
   const [time, setTime] = useState(0);
   const intervalRef = useRef(null);
@@ -172,7 +214,11 @@ const Timer = () => {
   );
 };
 
-// ✅ 🔟 Scroll automático a un elemento
+/********************************************
+ * ESCENARIO 10: Scroll hacia una sección
+ ********************************************/
+// Permite hacer scroll automático a una sección específica al hacer clic.
+
 const ScrollToElement = () => {
   const sectionRef = useRef(null);
 
@@ -190,7 +236,10 @@ const ScrollToElement = () => {
   );
 };
 
-// ✅ Componente principal con todos los ejemplos
+/********************************************
+ * COMPONENTE PRINCIPAL
+ ********************************************/
+
 const EjemplosUseRef = () => {
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>

@@ -1,6 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 
-// ✅ 1️⃣ Uso básico de useParams
+/********************************************
+ * ESCENARIO 1: Uso básico de useParams
+ *******************************************/
+// Este primer escenario muestra cómo capturar un parámetro simple de la URL.
+// En este caso, `:username` representa un valor dinámico que podemos extraer
+// con el hook `useParams`.
+
 const UserProfile = () => {
   const { username } = useParams();
   return <h2>👤 Perfil de usuario: {username}</h2>;
@@ -18,7 +24,13 @@ const BasicUseParamsExample = () => (
   </div>
 );
 
-// ✅ 2️⃣ Parámetro numérico en la URL
+/********************************************
+ * ESCENARIO 2: Parámetro numérico
+ *******************************************/
+// Este ejemplo muestra cómo capturar un ID numérico desde la URL.
+// Aunque useParams devuelve siempre strings, el nombre del parámetro
+// nos puede dar pistas semánticas como `productId`.
+
 const ProductPage = () => {
   const { productId } = useParams();
   return <h2>🛍️ Producto ID: {productId}</h2>;
@@ -36,7 +48,12 @@ const NumericParamsExample = () => (
   </div>
 );
 
-// ✅ 3️⃣ Múltiples parámetros en la URL
+/********************************************
+ * ESCENARIO 3: Múltiples parámetros
+ *******************************************/
+// En este caso, la ruta contiene dos valores dinámicos: `orderId` y `userId`.
+// Se pueden capturar de forma simultánea usando `useParams`.
+
 const OrderDetails = () => {
   const { orderId, userId } = useParams();
   return <h2>📦 Orden: {orderId}, Usuario: {userId}</h2>;
@@ -55,7 +72,12 @@ const MultipleParamsExample = () => (
   </div>
 );
 
-// ✅ 4️⃣ Parámetros opcionales en la URL
+/********************************************
+ * ESCENARIO 4: Parámetros opcionales
+ *******************************************/
+// Gracias a la sintaxis `:category?` podemos indicar que ese parámetro es opcional.
+// Si no viene en la URL, `useParams()` lo devolverá como `undefined`.
+
 const BlogPost = () => {
   const { postId, category } = useParams();
   return (
@@ -77,7 +99,12 @@ const OptionalParamsExample = () => (
   </div>
 );
 
-// ✅ 5️⃣ Parámetros en rutas anidadas
+/********************************************
+ * ESCENARIO 5: Rutas anidadas con parámetros
+ *******************************************/
+// Este patrón permite tener rutas con un layout o sección base (por ejemplo, `/courses`)
+// y debajo rutas hijas que reciben un parámetro (`:courseId`).
+
 const CourseLayout = () => <h2>📘 Sección de Cursos</h2>;
 
 const CourseDetails = () => {
@@ -98,7 +125,13 @@ const NestedParamsExample = () => (
   </div>
 );
 
-// ✅ 6️⃣ useParams con datos de una API simulada
+/********************************************
+ * ESCENARIO 6: useParams + API simulada
+ *******************************************/
+// Este ejemplo simula el uso de `useParams` junto con una API.
+// Se recibe un `productId` desde la URL, y se usa para buscar
+// en un objeto simulado como si fuera una respuesta del servidor.
+
 const products = {
   1: { name: "Laptop", price: "$1200" },
   2: { name: "Teléfono", price: "$600" },
@@ -110,9 +143,7 @@ const ProductInfo = () => {
   const product = products[productId];
 
   return product ? (
-    <h2>
-      🏷️ {product.name} - Precio: {product.price}
-    </h2>
+    <h2>🏷️ {product.name} - Precio: {product.price}</h2>
   ) : (
     <h2>❌ Producto no encontrado</h2>
   );
@@ -130,17 +161,23 @@ const ApiSimulatedParamsExample = () => (
   </div>
 );
 
-// ✅ Componente principal con todos los ejemplos
+/********************************************
+ * COMPONENTE PRINCIPAL: Muestra todos los ejemplos
+ *******************************************/
+// Este componente agrupa todos los escenarios para mostrar cómo `useParams`
+// puede utilizarse con rutas simples, múltiples, opcionales o anidadas.
+
 const EjemplosUseParams = () => (
   <Router>
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h2>📘 6 Ejemplos del Hook useParams en React Router</h2>
-      <BasicUseParamsExample />
-      <NumericParamsExample />
-      <MultipleParamsExample />
-      <OptionalParamsExample />
-      <NestedParamsExample />
-      <ApiSimulatedParamsExample />
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Ejemplos de useParams en React Router</h1>
+
+      <BasicUseParamsExample />        {/* ESCENARIO 1: Parámetro simple */}
+      <NumericParamsExample />         {/* ESCENARIO 2: Parámetro numérico */}
+      <MultipleParamsExample />        {/* ESCENARIO 3: Múltiples parámetros */}
+      <OptionalParamsExample />        {/* ESCENARIO 4: Parámetro opcional */}
+      <NestedParamsExample />          {/* ESCENARIO 5: Ruta anidada con parámetro */}
+      <ApiSimulatedParamsExample />    {/* ESCENARIO 6: API simulada */}
     </div>
   </Router>
 );

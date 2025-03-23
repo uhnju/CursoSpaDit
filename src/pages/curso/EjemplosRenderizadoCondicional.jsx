@@ -1,6 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-// ✅ 1️⃣ Renderizado condicional con `if`
+/********************************************
+ * ESCENARIO 1: Renderizado condicional con `if` (operador ternario)
+ *******************************************/
+// Este ejemplo muestra cómo alternar contenido entre dos opciones:
+// "Bienvenido" o "Inicia sesión", dependiendo del estado `isLoggedIn`.
+// El operador ternario es muy útil para elegir entre dos bloques de JSX.
+
 const ConditionalIf = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -14,7 +20,14 @@ const ConditionalIf = () => {
   );
 };
 
-// ✅ 2️⃣ Renderizado condicional con `&&`
+/********************************************
+ * ESCENARIO 2: Renderizado con `&&`
+ *******************************************/
+// Aquí se utiliza el operador lógico `&&` para mostrar un texto
+// solo cuando el estado `showText` sea `true`.
+// Es muy útil cuando solo queremos renderizar un bloque condicionalmente
+// y no necesitamos un "else".
+
 const ConditionalAnd = () => {
   const [showText, setShowText] = useState(false);
 
@@ -26,7 +39,13 @@ const ConditionalAnd = () => {
   );
 };
 
-// ✅ 3️⃣ Renderizado condicional con `switch`
+/********************************************
+ * ESCENARIO 3: Renderizado condicional con `switch`
+ *******************************************/
+// Este ejemplo demuestra cómo renderizar diferentes resultados
+// en función del estado `status` utilizando una estructura `switch`.
+// Muy útil cuando tenemos más de dos posibles valores a mostrar.
+
 const ConditionalSwitch = () => {
   const [status, setStatus] = useState("loading");
 
@@ -53,7 +72,12 @@ const ConditionalSwitch = () => {
   );
 };
 
-// ✅ 4️⃣ Renderizar un array condicionalmente
+/********************************************
+ * ESCENARIO 4: Renderizar un array condicionalmente
+ *******************************************/
+// En este ejemplo se verifica si hay elementos en el array `items`.
+// Si hay elementos, se muestra la lista. Si no, se muestra un mensaje alternativo.
+
 const ConditionalArray = () => {
   const [items, setItems] = useState(["Elemento 1", "Elemento 2"]);
 
@@ -69,7 +93,12 @@ const ConditionalArray = () => {
   );
 };
 
-// ✅ 5️⃣ Renderizado condicional basado en un estado numérico
+/********************************************
+ * ESCENARIO 5: Condicional con valor numérico
+ *******************************************/
+// Se muestra un texto distinto cuando el contador está en cero.
+// Este patrón es útil para dar mensajes personalizados según valores numéricos.
+
 const ConditionalNumber = () => {
   const [count, setCount] = useState(0);
 
@@ -81,7 +110,12 @@ const ConditionalNumber = () => {
   );
 };
 
-// ✅ 6️⃣ Mostrar/Ocultar un componente condicionalmente
+/********************************************
+ * ESCENARIO 6: Mostrar/Ocultar un componente
+ *******************************************/
+// Este ejemplo alterna la visibilidad de un componente (párrafo) mediante el estado `visible`.
+// Muy común para construir interfaces con elementos colapsables o modales.
+
 const ConditionalComponent = () => {
   const [visible, setVisible] = useState(true);
 
@@ -93,7 +127,12 @@ const ConditionalComponent = () => {
   );
 };
 
-// ✅ 7️⃣ Renderizar con un operador ternario en JSX
+/********************************************
+ * ESCENARIO 7: Operador ternario directo en JSX
+ *******************************************/
+// Se alterna un mensaje según el valor del estado `isAdmin`.
+// El operador ternario puede usarse directamente dentro del JSX como este ejemplo.
+
 const ConditionalTernary = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -105,7 +144,12 @@ const ConditionalTernary = () => {
   );
 };
 
-// ✅ 8️⃣ Renderizar diferentes componentes condicionalmente
+/********************************************
+ * ESCENARIO 8: Renderizar distintos componentes según rol
+ *******************************************/
+// Aquí se cambia entre dos componentes (`AdminPanel` y `UserPanel`)
+// según el valor de la prop `role`. Este patrón se usa mucho en apps con roles de usuario.
+
 const AdminPanel = () => <p>Panel de Administración</p>;
 const UserPanel = () => <p>Panel de Usuario</p>;
 
@@ -122,7 +166,12 @@ const ConditionalComponentSwitch = () => {
   );
 };
 
-// ✅ 9️⃣ Renderizado condicional con estilos dinámicos
+/********************************************
+ * ESCENARIO 9: Condicional con estilos dinámicos
+ *******************************************/
+// Este ejemplo modifica el estilo (color del texto) en función del estado `active`.
+// Es una técnica útil para indicar visualmente estados (activo/inactivo, correcto/incorrecto, etc.)
+
 const ConditionalStyles = () => {
   const [active, setActive] = useState(false);
 
@@ -136,7 +185,13 @@ const ConditionalStyles = () => {
   );
 };
 
-// ✅ 🔟 Renderizado condicional basado en una promesa simulada
+/********************************************
+ * ESCENARIO 10: Renderizado condicional con datos asincrónicos
+ *******************************************/
+// Se simula una llamada a una API (con `setTimeout`) y se muestra un mensaje de carga.
+// Una vez que se "cargan los datos", se muestra el resultado.
+// Ideal para introducir el patrón loading/success/error.
+
 const ConditionalAsync = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
@@ -157,20 +212,26 @@ const ConditionalAsync = () => {
   );
 };
 
-// ✅ Componente principal con todos los ejemplos
+/********************************************
+ * COMPONENTE PRINCIPAL: Muestra todos los escenarios
+ *******************************************/
+// Este componente agrupa todos los ejemplos para poder visualizarlos en conjunto.
+// El profesor puede ir activando cada uno y explicando los diferentes patrones de renderizado condicional.
+
 const EjemplosRenderizadoCondicional = () => (
-  <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-    <h2>📘 10 Escenarios Útiles de Renderizado Condicional en React</h2>
-    <ConditionalIf />
-    <ConditionalAnd />
-    <ConditionalSwitch />
-    <ConditionalArray />
-    <ConditionalNumber />
-    <ConditionalComponent />
-    <ConditionalTernary />
-    <ConditionalComponentSwitch />
-    <ConditionalStyles />
-    <ConditionalAsync />
+  <div className="p-6 space-y-6">
+    <h1 className="text-2xl font-bold">Ejemplos de renderizado condicional en React</h1>
+
+    <ConditionalIf />                  {/* ESCENARIO 1: if con operador ternario */}
+    <ConditionalAnd />                {/* ESCENARIO 2: && */}
+    <ConditionalSwitch />             {/* ESCENARIO 3: switch */}
+    <ConditionalArray />              {/* ESCENARIO 4: array vacío o no */}
+    <ConditionalNumber />             {/* ESCENARIO 5: número condicional */}
+    <ConditionalComponent />          {/* ESCENARIO 6: mostrar/ocultar */}
+    <ConditionalTernary />            {/* ESCENARIO 7: ternario en JSX */}
+    <ConditionalComponentSwitch />    {/* ESCENARIO 8: distintos componentes */}
+    <ConditionalStyles />             {/* ESCENARIO 9: estilos condicionales */}
+    <ConditionalAsync />              {/* ESCENARIO 10: render con promesa simulada */}
   </div>
 );
 

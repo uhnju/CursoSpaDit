@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-// ✅ 1️⃣ Ejecutar código al montar el componente (simulación de "componentDidMount")
+/********************************************
+ * ESCENARIO 1: Ejecutar al montar el componente
+ *******************************************/
+// Este `useEffect` se ejecuta una sola vez cuando el componente se monta,
+// simulando el comportamiento de `componentDidMount` en clases.
+
 const MountEffect = () => {
   useEffect(() => {
     console.log("El componente se ha montado.");
@@ -9,7 +14,12 @@ const MountEffect = () => {
   return <p>✅ 1. Efecto ejecutado solo al montar.</p>;
 };
 
-// ✅ 2️⃣ Ejecutar código al desmontar (cleanup)
+/********************************************
+ * ESCENARIO 2: Ejecutar al desmontar (limpieza)
+ *******************************************/
+// En este ejemplo, se devuelve una función dentro del `useEffect` que se ejecutará
+// justo antes de que el componente se desmonte. Es útil para limpiar listeners o timers.
+
 const UnmountEffect = () => {
   useEffect(() => {
     return () => console.log("El componente se desmontó.");
@@ -18,7 +28,12 @@ const UnmountEffect = () => {
   return <p>✅ 2. Este efecto se limpiará al desmontarse.</p>;
 };
 
-// ✅ 3️⃣ Ejecutar código cuando cambia un estado
+/********************************************
+ * ESCENARIO 3: Escuchar cambios de estado
+ *******************************************/
+// El efecto se ejecuta cada vez que el valor de `count` cambia.
+// Ideal para reaccionar ante cambios de estado específicos.
+
 const StateEffect = () => {
   const [count, setCount] = useState(0);
 
@@ -34,7 +49,12 @@ const StateEffect = () => {
   );
 };
 
-// ✅ 4️⃣ Detectar cambios en el tamaño de la ventana
+/********************************************
+ * ESCENARIO 4: Detectar tamaño de la ventana (resize)
+ *******************************************/
+// Añade un `eventListener` para actualizar el estado cuando se redimensiona la ventana.
+// Se limpia el listener al desmontar.
+
 const WindowResizeEffect = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -48,7 +68,12 @@ const WindowResizeEffect = () => {
   return <p>✅ 4. Ancho de ventana: {width}px</p>;
 };
 
-// ✅ 5️⃣ Hacer una petición a una API
+/********************************************
+ * ESCENARIO 5: Hacer una petición a una API
+ *******************************************/
+// Este `useEffect` realiza una petición con `fetch` cuando el componente se monta.
+// Se usa mucho para cargar datos desde el servidor.
+
 const FetchEffect = () => {
   const [data, setData] = useState(null);
 
@@ -61,7 +86,12 @@ const FetchEffect = () => {
   return <p>✅ 5. Datos: {data ? JSON.stringify(data) : "Cargando..."}</p>;
 };
 
-// ✅ 6️⃣ Escuchar eventos de teclado
+/********************************************
+ * ESCENARIO 6: Escuchar eventos de teclado
+ *******************************************/
+// Se detecta cualquier tecla presionada en el navegador y se muestra por consola.
+// Es útil para accesos rápidos o controles de accesibilidad.
+
 const KeyPressEffect = () => {
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -75,7 +105,11 @@ const KeyPressEffect = () => {
   return <p>✅ 6. Presiona cualquier tecla y revisa la consola.</p>;
 };
 
-// ✅ 7️⃣ Animación al montar el componente
+/********************************************
+ * ESCENARIO 7: Animación al montar el componente
+ *******************************************/
+// Se simula una animación de entrada cambiando la opacidad al montar.
+
 const AnimationEffect = () => {
   const [opacity, setOpacity] = useState(0);
 
@@ -86,7 +120,12 @@ const AnimationEffect = () => {
   return <p style={{ opacity, transition: "opacity 1s" }}>✅ 7. Animación con useEffect.</p>;
 };
 
-// ✅ 8️⃣ Cambiar dinámicamente el título de la página
+/********************************************
+ * ESCENARIO 8: Cambiar el título de la página
+ *******************************************/
+// Este efecto actualiza el `document.title` cada vez que cambia `count`.
+// Muy usado para mostrar notificaciones en la pestaña del navegador.
+
 const DynamicTitleEffect = () => {
   const [count, setCount] = useState(0);
 
@@ -102,7 +141,12 @@ const DynamicTitleEffect = () => {
   );
 };
 
-// ✅ 9️⃣ Guardar estado en localStorage
+/********************************************
+ * ESCENARIO 9: Guardar texto en localStorage
+ *******************************************/
+// Cada vez que cambia el contenido del textarea, se guarda automáticamente en localStorage.
+// Así se mantiene persistente incluso tras cerrar o recargar la página.
+
 const LocalStorageEffect = () => {
   const [text, setText] = useState(localStorage.getItem("text") || "");
 
@@ -119,7 +163,12 @@ const LocalStorageEffect = () => {
   );
 };
 
-// ✅ 🔟 Temporizador con `useEffect`
+/********************************************
+ * ESCENARIO 10: Temporizador (timer con intervalos)
+ *******************************************/
+// Usa `setInterval` para contar segundos. El intervalo se limpia automáticamente
+// cuando el componente se desmonta para evitar fugas de memoria.
+
 const TimerEffect = () => {
   const [time, setTime] = useState(0);
 
@@ -134,21 +183,27 @@ const TimerEffect = () => {
   return <p>✅ 🔟 Tiempo transcurrido: {time}s</p>;
 };
 
-// ✅ Componente principal con todos los ejemplos
+/********************************************
+ * COMPONENTE PRINCIPAL: Muestra todos los escenarios
+ *******************************************/
+// Este componente agrupa todos los ejemplos de uso de `useEffect` en una sola vista,
+// ideal para demostrar cómo reacciona React a cambios de estado, eventos y efectos secundarios.
+
 const EjemplosUseEffect = () => {
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h2>📘 10 Escenarios Útiles de useEffect</h2>
-      <MountEffect />
-      <UnmountEffect />
-      <StateEffect />
-      <WindowResizeEffect />
-      <FetchEffect />
-      <KeyPressEffect />
-      <AnimationEffect />
-      <DynamicTitleEffect />
-      <LocalStorageEffect />
-      <TimerEffect />
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Ejemplos de useEffect en React</h1>
+
+      <MountEffect />           {/* ESCENARIO 1 */}
+      <UnmountEffect />         {/* ESCENARIO 2 */}
+      <StateEffect />           {/* ESCENARIO 3 */}
+      <WindowResizeEffect />    {/* ESCENARIO 4 */}
+      <FetchEffect />           {/* ESCENARIO 5 */}
+      <KeyPressEffect />        {/* ESCENARIO 6 */}
+      <AnimationEffect />       {/* ESCENARIO 7 */}
+      <DynamicTitleEffect />    {/* ESCENARIO 8 */}
+      <LocalStorageEffect />    {/* ESCENARIO 9 */}
+      <TimerEffect />           {/* ESCENARIO 10 */}
     </div>
   );
 };

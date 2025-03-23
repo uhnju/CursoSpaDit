@@ -1,8 +1,14 @@
 import React from "react";
 
-// Componente principal que ilustra todas las características de la sintaxis JSX
+/********************************************
+ * COMPONENTE PRINCIPAL: Sintaxis JSX en React
+ *******************************************/
+// Este componente centraliza ejemplos clave sobre el uso de JSX en React.
+// Se explican expresiones dentro de JSX, condiciones, estilos, clases, fragmentos, listas y atributos HTML.
+// Es ideal para introducir la base sintáctica de los componentes en React.
+
 const EjemplosSintaxisJSX = () => {
-  // Variables y expresiones en JSX
+  // Variables y expresiones usadas en los ejemplos
   const name = "React";
   const number = 42;
   const isReactAwesome = true;
@@ -11,7 +17,7 @@ const EjemplosSintaxisJSX = () => {
     lastName: "Doe",
   };
 
-  // Estilos en línea usando JSX (deben pasarse como un objeto)
+  // Estilos en línea: deben pasarse como objeto en formato camelCase
   const inlineStyle = {
     color: "blue",
     fontSize: "20px",
@@ -19,42 +25,51 @@ const EjemplosSintaxisJSX = () => {
   };
 
   return (
-    <div>
-      {/* Uso de expresiones dentro de JSX con llaves {} */}
+    <div className="p-6 space-y-4">
+      {/* ESCENARIO 1: Uso de variables y expresiones */}
+      {/* Se pueden insertar valores dentro del JSX mediante llaves {} */}
       <h1>Hola, {name}!</h1>
       <p>El número es: {number}</p>
       <p>¿React es asombroso? {isReactAwesome ? "Sí" : "No"}</p>
       <p>Nombre completo: {user.firstName} {user.lastName}</p>
-      
-      {/* JSX no permite if-else directamente, pero se pueden usar operadores ternarios */}
+
+      {/* ESCENARIO 2: Condicional simple con operador ternario */}
+      {/* JSX no permite if-else directo, pero sí ternarios dentro de las llaves */}
       <p>{isReactAwesome ? "Definitivamente sí." : "Tal vez no."}</p>
-      
-      {/* Aplicando estilos en línea */}
+
+      {/* ESCENARIO 3: Estilos en línea */}
+      {/* Los estilos se aplican con un objeto JS en formato camelCase */}
       <p style={inlineStyle}>Este es un texto con estilos en línea.</p>
 
-      {/* Clases CSS en JSX */}
+      {/* ESCENARIO 4: Clases CSS en JSX */}
+      {/* En lugar de `class`, usamos `className` */}
       <p className="text-primary">Este es un texto con clase CSS.</p>
-      
-      {/* JSX requiere que los elementos estén envueltos en un solo nodo padre */}
-      <> {/* Fragmento React (Fragment) para evitar nodos innecesarios */}
+
+      {/* ESCENARIO 5: Fragmentos (<> </>) */}
+      {/* JSX solo permite un nodo padre. Podemos usar Fragment para agrupar sin generar nodos adicionales */}
+      <>
         <h2>Encabezado dentro de un Fragment</h2>
         <p>Esto forma parte del mismo Fragment.</p>
       </>
 
-      {/* JSX permite comentarios, pero deben ir dentro de llaves */}
-      {/* Este es un comentario dentro de JSX */}
+      {/* ESCENARIO 6: Comentarios en JSX */}
+      {/* Se escriben dentro de llaves: */}
+      {/* Este es un comentario válido */}
 
-      {/* Renderizado condicional con && (operador lógico AND) */}
+      {/* ESCENARIO 7: Renderizado condicional con operador lógico AND (&&) */}
+      {/* Si `isReactAwesome` es true, se renderiza el contenido */}
       {isReactAwesome && <p>¡React es increíble!</p>}
-      
-      {/* Listas y el uso de la key en elementos renderizados dinámicamente */}
+
+      {/* ESCENARIO 8: Listas renderizadas dinámicamente con .map */}
+      {/* Cada elemento renderizado debe tener una `key` única */}
       <ul>
         {["Manzana", "Banana", "Cereza"].map((fruit, index) => (
           <li key={index}>{fruit}</li>
         ))}
       </ul>
 
-      {/* JSX y atributos en etiquetas HTML (camelCase para atributos de eventos y propiedades) */}
+      {/* ESCENARIO 9: Atributos HTML en JSX */}
+      {/* Algunos atributos cambian a camelCase, como `autoFocus`, `htmlFor`, `onClick`, etc. */}
       <input type="text" placeholder="Escribe aquí" autoFocus />
       <img src="https://via.placeholder.com/150" alt="Imagen de ejemplo" />
     </div>

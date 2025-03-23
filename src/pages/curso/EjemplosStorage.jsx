@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import Cookies from "js-cookie";
 
-// ✅ 1️⃣ Uso básico de localStorage
+/********************************************
+ * ESCENARIO 1: Uso básico de localStorage
+ *******************************************/
+// Almacenamos el valor introducido en un input en el localStorage.
+// El valor persiste incluso después de recargar o cerrar el navegador.
+
 const LocalStorageExample = () => {
   const [name, setName] = useState(localStorage.getItem("name") || "");
 
@@ -12,13 +17,23 @@ const LocalStorageExample = () => {
   return (
     <div>
       <h3>1️⃣ Uso básico de localStorage</h3>
-      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Escribe tu nombre" />
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Escribe tu nombre"
+      />
       <p>Nombre guardado: {name}</p>
     </div>
   );
 };
 
-// ✅ 2️⃣ Uso de sessionStorage (datos que se borran al cerrar el navegador)
+/********************************************
+ * ESCENARIO 2: Uso de sessionStorage
+ *******************************************/
+// A diferencia de localStorage, los datos en sessionStorage
+// se eliminan cuando se cierra el navegador o la pestaña.
+
 const SessionStorageExample = () => {
   const [count, setCount] = useState(sessionStorage.getItem("count") || 0);
 
@@ -35,7 +50,12 @@ const SessionStorageExample = () => {
   );
 };
 
-// ✅ 3️⃣ Manejo de JSON en localStorage
+/********************************************
+ * ESCENARIO 3: Almacenamiento de JSON
+ *******************************************/
+// Guardamos y recuperamos un objeto (usuario) usando JSON.stringify y JSON.parse.
+// localStorage solo puede guardar strings, por lo que hay que convertir.
+
 const LocalStorageJSONExample = () => {
   const [user, setUser] = useState(() => {
     return JSON.parse(localStorage.getItem("user")) || { name: "", age: "" };
@@ -48,14 +68,29 @@ const LocalStorageJSONExample = () => {
   return (
     <div>
       <h3>3️⃣ Almacenamiento de JSON en localStorage</h3>
-      <input type="text" placeholder="Nombre" value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value })} />
-      <input type="number" placeholder="Edad" value={user.age} onChange={(e) => setUser({ ...user, age: e.target.value })} />
+      <input
+        type="text"
+        placeholder="Nombre"
+        value={user.name}
+        onChange={(e) => setUser({ ...user, name: e.target.value })}
+      />
+      <input
+        type="number"
+        placeholder="Edad"
+        value={user.age}
+        onChange={(e) => setUser({ ...user, age: e.target.value })}
+      />
       <p>Nombre: {user.name}, Edad: {user.age}</p>
     </div>
   );
 };
 
-// ✅ 4️⃣ Eliminación de datos en localStorage
+/********************************************
+ * ESCENARIO 4: Eliminación de datos en localStorage
+ *******************************************/
+// Borra una clave específica del localStorage.
+// Después de eliminar, recargamos la página para simular que los datos ya no existen.
+
 const RemoveLocalStorageExample = () => {
   const removeData = () => {
     localStorage.removeItem("user");
@@ -71,7 +106,12 @@ const RemoveLocalStorageExample = () => {
   );
 };
 
-// ✅ 5️⃣ Uso de Cookies con js-cookie
+/********************************************
+ * ESCENARIO 5: Cookies con js-cookie (comentado)
+ *******************************************/
+// Este ejemplo requiere la librería externa `js-cookie`.
+// Puedes descomentarlo si decides instalarla.
+
 // const CookiesExample = () => {
 //   const [cookieValue, setCookieValue] = useState(Cookies.get("theme") || "light");
 
@@ -90,7 +130,12 @@ const RemoveLocalStorageExample = () => {
 //   );
 // };
 
-// ✅ 6️⃣ Manejo de IndexedDB (Almacenamiento avanzado)
+/********************************************
+ * ESCENARIO 6: Uso de IndexedDB
+ *******************************************/
+// IndexedDB es una base de datos más avanzada que permite guardar objetos de manera estructurada.
+// Aquí se crea una base y se almacena una cadena de texto.
+
 const IndexedDBExample = () => {
   const [data, setData] = useState("");
 
@@ -137,7 +182,12 @@ const IndexedDBExample = () => {
   );
 };
 
-// ✅ 7️⃣ Persistencia combinada: localStorage + sessionStorage
+/********************************************
+ * ESCENARIO 7: Combinación de localStorage y sessionStorage
+ *******************************************/
+// Se manejan ambos tipos de almacenamiento al mismo tiempo.
+// El dato "temporal" se guarda en sessionStorage y el "persistente" en localStorage.
+
 const HybridStorageExample = () => {
   const [sessionData, setSessionData] = useState(sessionStorage.getItem("sessionData") || "");
   const [localData, setLocalData] = useState(localStorage.getItem("localData") || "");
@@ -150,14 +200,29 @@ const HybridStorageExample = () => {
   return (
     <div>
       <h3>7️⃣ Combinación de localStorage y sessionStorage</h3>
-      <input type="text" placeholder="Dato temporal" value={sessionData} onChange={(e) => setSessionData(e.target.value)} />
-      <input type="text" placeholder="Dato persistente" value={localData} onChange={(e) => setLocalData(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Dato temporal"
+        value={sessionData}
+        onChange={(e) => setSessionData(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Dato persistente"
+        value={localData}
+        onChange={(e) => setLocalData(e.target.value)}
+      />
       <p>SessionStorage: {sessionData} | LocalStorage: {localData}</p>
     </div>
   );
 };
 
-// ✅ 8️⃣ Implementación de un Hook para localStorage
+/********************************************
+ * ESCENARIO 8: Hook personalizado para localStorage
+ *******************************************/
+// Este hook encapsula el patrón de lectura y escritura en localStorage
+// y puede reutilizarse fácilmente en diferentes componentes.
+
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
     return localStorage.getItem(key) || initialValue;
@@ -183,18 +248,25 @@ const CustomHookStorageExample = () => {
   );
 };
 
-// ✅ Componente principal con todos los ejemplos
+/********************************************
+ * COMPONENTE PRINCIPAL: Muestra todos los ejemplos
+ *******************************************/
+// Este componente centraliza todos los escenarios relacionados con el almacenamiento
+// local en el navegador. Cada uno cubre una técnica distinta: localStorage, sessionStorage,
+// JSON, IndexedDB y hooks personalizados.
+
 const EjemplosStorage = () => (
-  <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-    <h2>📘 8 Ejemplos de Uso del Storage en React</h2>
-    <LocalStorageExample />
-    <SessionStorageExample />
-    <LocalStorageJSONExample />
-    <RemoveLocalStorageExample />
-    <CookiesExample />
-    <IndexedDBExample />
-    <HybridStorageExample />
-    <CustomHookStorageExample />
+  <div className="p-6 space-y-6">
+    <h1 className="text-2xl font-bold">Ejemplos de almacenamiento en React</h1>
+
+    <LocalStorageExample />         {/* ESCENARIO 1 */}
+    <SessionStorageExample />       {/* ESCENARIO 2 */}
+    <LocalStorageJSONExample />     {/* ESCENARIO 3 */}
+    <RemoveLocalStorageExample />   {/* ESCENARIO 4 */}
+    {/* <CookiesExample /> */}       {/* ESCENARIO 5 (desactivado por defecto) */}
+    <IndexedDBExample />            {/* ESCENARIO 6 */}
+    <HybridStorageExample />        {/* ESCENARIO 7 */}
+    <CustomHookStorageExample />    {/* ESCENARIO 8 */}
   </div>
 );
 
