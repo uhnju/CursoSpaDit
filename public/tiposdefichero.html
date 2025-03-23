@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generando HTML en Diferentes Enfoques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background: #222;
+            color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generando HTML en Diferentes Enfoques</h1>
+    <h2>Introducción</h2>
+    <p>En el desarrollo web moderno, existen diversas maneras de generar y manipular elementos HTML mediante código...</p>
+
+    <h2>1️⃣ JavaScript puro (sin React)</h2>
+    <pre>
+const Example = () => {
+  const div = document.createElement("div");
+  div.textContent = "It's Me. Hi!";
+  div.className = "example";
+  return div;
+};
+document.body.appendChild(Example());
+    </pre>
+
+    <h2>2️⃣ React sin JSX</h2>
+    <pre>
+const Example = () => {
+  return React.createElement("div", { className: "example" }, "It's Me. Hi!");
+};
+    </pre>
+
+    <h2>3️⃣ React con JSX</h2>
+    <pre>
+const Example = () => {
+  return <div className="example">It's Me. Hi!</div>;
+};
+    </pre>
+
+    <h2>📌 Comparación y Conclusión</h2>
+    <table>
+        <tr>
+            <th>Enfoque</th>
+            <th>Ventajas</th>
+            <th>Desventajas</th>
+        </tr>
+        <tr>
+            <td>JavaScript puro</td>
+            <td>No depende de bibliotecas externas</td>
+            <td>Manipular el DOM puede ser tedioso</td>
+        </tr>
+        <tr>
+            <td>React sin JSX</td>
+            <td>No requiere transformación</td>
+            <td>Sintaxis más verbosa y difícil de leer</td>
+        </tr>
+        <tr>
+            <td>React con JSX</td>
+            <td>Código más legible y limpio</td>
+            <td>Requiere Babel para compilar JSX</td>
+        </tr>
+    </table>
+</body>
+</html>

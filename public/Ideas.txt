@@ -1,0 +1,66 @@
+
+
+añadir ejemplo de validar campo de formulario con una expresion regular, por ejemplo un email. (se usa el método regExp.test(text))
+
+localStorage
+
+fechas
+
+JSON.parse(datos)
+
+
+
+Axios. ejemplos pasando paramas
+https://www.youtube.com/watch?v=Zt1VceJs0vU
+
+
+
+Guía Completa de Validación de Formularios en React
+https://www.youtube.com/watch?v=tli5n_NqQW8
+
+
+LocalStorage (Javascript)
+https://www.youtube.com/watch?v=SS0haGSC6vI
+
+Posible ejemplo cambio de tema con cookies, localStorage y useContext
+
+
+
+ejemplo de useMemo, usar el https://www.youtube.com/watch?v=ladwC6Lrs-M&t=14221s
+
+
+
+https://www.youtube.com/watch?v=vH1u6Xv6oXw
+Eventos:
+https://www.youtube.com/watch?v=vH1u6Xv6oXw&t=1482s
+Renderizado Condicional:
+https://www.youtube.com/watch?v=vH1u6Xv6oXw&t=2583s
+
+
+Rutas Paramétricas (useParams)
+https://www.youtube.com/watch?v=vH1u6Xv6oXw&t=8101s
+
+
+
+
+
+ejemplo useEffect y a continuacion custom Hook basado en ese ejemplo:
+
+https://www.youtube.com/watch?v=GMnWXlJnbNo&t=8808s
+https://www.youtube.com/watch?v=GMnWXlJnbNo&t=11770s
+https://www.youtube.com/watch?v=GMnWXlJnbNo&t=37207s
+
+
+
+
+
+
+Algun Ejemplo basico de Composition Pattern
+
+Algun Ejemplo basico de Context
+
+Algun Ejemplo basico de Error Boundaries
+
+Algun Ejemplo basico de React Router DOM
+
+

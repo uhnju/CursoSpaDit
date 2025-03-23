@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de React: Hooks y Conceptos Fundamentales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .index {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .index a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .index a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Curso de React: Hooks y Conceptos Fundamentales</h1>
+    <p>Esta documentación está diseñada para complementar el curso de React, proporcionando explicaciones detalladas, pedagógicas y ampliadas de los hooks y técnicas más comunes. Cada sección incluye sintaxis, ejemplos de uso, aplicaciones reales y consideraciones clave para que el alumno entienda tanto el "qué" como el "por qué" de cada herramienta.</p>
+
+    <!-- Índice -->
+    <div class="index">
+        <h2>Índice</h2>
+        <ul>
+            <li><a href="#jsx">01. Introducción a JSX</a></li>
+            <li><a href="#props">02. Uso de props y componentes reutilizables</a></li>
+            <li><a href="#renderizado-condicional">03. Renderizado condicional</a></li>
+            <li><a href="#renderizado-listas">04. Renderizado de listas</a></li>
+            <li><a href="#eventos">05. Manejo de eventos</a></li>
+            <li><a href="#useState">06. Estado con useState</a></li>
+            <li><a href="#useEffect">07. Efectos secundarios con useEffect</a></li>
+            <li><a href="#api-requests">08. Peticiones a APIs</a></li>
+            <li><a href="#useRef">09. Referencias y persistencia con useRef</a></li>
+            <li><a href="#useContext">10. Contexto global con useContext</a></li>
+            <li><a href="#router">11. Navegación con React Router</a></li>
+            <li><a href="#useParams">12. Parámetros de ruta con useParams</a></li>
+            <li><a href="#useReducer">13. Estados complejos con useReducer</a></li>
+            <li><a href="#storage">14. Persistencia con localStorage y sessionStorage</a></li>
+            <li><a href="#tsx">15. Introducción a React con TypeScript</a></li>
+        </ul>
+    </div>
+
+    <!-- Sección 1: Introducción a JSX -->
+    <div class="section" id="jsx">
+        <h2>01. Introducción a JSX</h2>
+        <p><strong>Definición:</strong> JSX es una extensión de sintaxis que permite escribir HTML dentro de JavaScript. Es una característica fundamental de React que facilita la creación de interfaces de usuario.</p>
+        <p><strong>Reglas básicas:</strong></p>
+        <ul>
+            <li>Los componentes deben devolver un único elemento padre. Usa fragmentos (<code>&lt;&gt;...&lt;/&gt;</code>) si no quieres agregar un <code>div</code> adicional.</li>
+            <li>Las expresiones JavaScript se escriben entre <code>{}</code>.</li>
+            <li>Atributos como <code>class</code> pasan a ser <code>className</code>.</li>
+            <li>Los nombres de componentes deben comenzar con mayúscula.</li>
+        </ul>
+        <p><strong>Ejemplo:</strong></p>
+        <pre><code>
+const nombre = "React";
+return (
+  &lt;div className="container"&gt;
+    &lt;h1&gt;Hola, {nombre}&lt;/h1&gt;
+    &lt;p&gt;Este es un ejemplo de JSX.&lt;/p&gt;
+  &lt;/div&gt;
+);
+        </code></pre>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Evita lógica compleja directamente en JSX. Extrae la lógica a funciones o variables.</li>
+            <li>Usa fragmentos para evitar elementos innecesarios en el DOM.</li>
+            <li>JSX no es HTML, aunque se parezca. Es una abstracción que React convierte en elementos del DOM.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 2: Uso de props y componentes reutilizables -->
+    <div class="section" id="props">
+        <h2>02. Uso de props y componentes reutilizables</h2>
+        <p><strong>Definición:</strong> Las props (propiedades) son el mecanismo para pasar datos desde un componente padre hacia sus hijos. Permiten crear componentes reutilizables y modulares.</p>
+        <p><strong>Ejemplo:</strong></p>
+        <pre><code>
+const Saludo = ({ nombre, edad }) => (
+  &lt;div&gt;
+    &lt;h1&gt;Hola, {nombre}&lt;/h1&gt;
+    {edad && &lt;p&gt;Tienes {edad} años.&lt;/p&gt;}
+  &lt;/div&gt;
+);
+
+&lt;Saludo nombre="Juan" edad={25} /&gt;
+        </code></pre>
+        <p><strong>Características:</strong></p>
+        <ul>
+            <li>Las props son inmutables dentro del componente hijo.</li>
+            <li>Permiten reutilización de componentes.</li>
+            <li>Puedes usar destructuring para acceder a las props de manera más clara.</li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Usa validación de props con <code>PropTypes</code> o TypeScript para evitar errores.</li>
+            <li>Evita el "prop drilling" (pasar props a través de múltiples niveles) usando <code>useContext</code>.</li>
+            <li>Mantén los componentes pequeños y enfocados en una sola responsabilidad.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 3: Renderizado condicional -->
+    <div class="section" id="renderizado-condicional">
+        <h2>03. Renderizado condicional</h2>
+        <p><strong>Definición:</strong> El renderizado condicional permite mostrar u ocultar componentes o elementos del DOM en función de una condición lógica. Es esencial para construir interfaces dinámicas.</p>
+        <p><strong>Sintaxis común:</strong></p>
+        <pre><code>
+{condición ? &lt;ComponenteA /&gt; : &lt;ComponenteB /&gt;}
+{condición && &lt;Componente /&gt;}
+        </code></pre>
+        <p><strong>Ejemplo práctico:</strong></p>
+        <pre><code>
+const LoginStatus = ({ isLoggedIn }) => {
+  return (
+    &lt;div&gt;
+      {isLoggedIn ? &lt;p&gt;Bienvenido de nuevo&lt;/p&gt; : &lt;p&gt;Por favor, inicia sesión&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+};
+        </code></pre>
+        <p><strong>Casos de uso:</strong></p>
+        <ul>
+            <li>Mostrar formularios de login sólo si el usuario no está autenticado.</li>
+            <li>Alternar entre botones como "Seguir"/"Dejar de seguir".</li>
+            <li>Mostrar mensajes de error si existe una validación fallida.</li>
+            <li>Deshabilitar secciones de la UI dependiendo de los permisos del usuario.</li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Usa ternarios simples. Si la lógica es compleja, extrae funciones auxiliares.</li>
+            <li>Puedes devolver <code>null</code> para no renderizar nada:</li>
+        </ul>
+        <pre><code>{condición ? &lt;Componente /&gt; : null}</code></pre>
+    </div>
+
+    <!-- Sección 4: Renderizado de listas -->
+    <div class="section" id="renderizado-listas">
+        <h2>04. Renderizado de listas</h2>
+        <p><strong>Definición:</strong> Renderizar listas permite mostrar colecciones de datos como elementos individuales (cards, filas, etc.). Se hace comúnmente usando <code>Array.map()</code>.</p>
+        <p><strong>Sintaxis básica:</strong></p>
+        <pre><code>
+{elementos.map((item) => (
+  &lt;Elemento key={item.id} {...item} /&gt;
+))}
+        </code></pre>
+        <p><strong>Ejemplo práctico:</strong></p>
+        <pre><code>
+const ListaUsuarios = ({ usuarios }) => {
+  return (
+    &lt;ul&gt;
+      {usuarios.map(usuario => (
+        &lt;li key={usuario.id}&gt;{usuario.nombre}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+};
+        </code></pre>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Siempre usa una <code>key</code> única y estable. Nunca uses <code>index</code> si la lista puede cambiar de orden.</li>
+            <li>Para listas muy grandes, considera técnicas de virtualización (ej: <code>react-window</code>, <code>react-virtualized</code>).</li>
+        </ul>
+    </div>
+
+    <!-- Sección 5: Manejo de eventos -->
+    <div class="section" id="eventos">
+        <h2>05. Manejo de eventos</h2>
+        <p><strong>Definición:</strong> El manejo de eventos permite a la interfaz responder a las acciones del usuario, como clics, escritura, movimientos del ratón, etc.</p>
+        <p><strong>Ejemplo:</strong></p>
+        <pre><code>
+&lt;button onClick={() => alert("¡Hola!")}&gt;Haz clic&lt;/button&gt;
+&lt;input onChange={(e) => console.log(e.target.value)} /&gt;
+        </code></pre>
+        <p><strong>Eventos comunes:</strong></p>
+        <ul>
+            <li><code>onClick</code>, <code>onChange</code>, <code>onSubmit</code></li>
+            <li><code>onKeyDown</code>, <code>onKeyUp</code>, <code>onMouseOver</code></li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Usa funciones puras o evita crear funciones anónimas dentro del render si hay problemas de rendimiento.</li>
+            <li>React usa un sistema de eventos sintéticos para compatibilidad cross-browser.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 6: Estado con useState -->
+    <div class="section" id="useState">
+        <h2>06. Estado con useState</h2>
+        <p><strong>Definición:</strong> <code>useState</code> es el hook más fundamental en React. Permite a un componente funcional mantener valores que cambian con el tiempo (estado). Cada vez que el estado cambia, el componente se vuelve a renderizar con el nuevo valor.</p>
+        <p><strong>Sintaxis básica:</strong></p>
+        <pre><code>const [estado, setEstado] = useState(valorInicial);</code></pre>
+        <ul>
+            <li><code>estado</code>: es la variable que contiene el valor actual.</li>
+            <li><code>setEstado</code>: función que actualiza el valor y provoca un nuevo render.</li>
+        </ul>
+        <p><strong>Ejemplo básico:</strong></p>
+        <pre><code>
+const [contador, setContador] = useState(0);
+
+return (
+  &lt;div&gt;
+    &lt;p&gt;Contador: {contador}&lt;/p&gt;
+    &lt;button onClick={() => setContador(contador + 1)}&gt;Sumar&lt;/button&gt;
+  &lt;/div&gt;
+);
+        </code></pre>
+        <p><strong>Casos de uso comunes:</strong></p>
+        <ul>
+            <li>Contadores</li>
+            <li>Formularios</li>
+            <li>Visibilidad de elementos</li>
+            <li>Estados de carga o error (loading, error)</li>
+            <li>Cambio de temas o preferencias</li>
+        </ul>
+        <p><strong>Inicialización perezosa:</strong></p>
+        <pre><code>const [valor, setValor] = useState(() => calculoCostoso());</code></pre>
+        <p><strong>Buenas prácticas:</strong></p>
+        <ul>
+            <li>Nunca modificar el estado directamente.</li>
+            <li>Usar funciones si el nuevo estado depende del anterior:</li>
+        </ul>
+        <pre><code>setContador(prev => prev + 1);</code></pre>
+    </div>
+
+    <!-- Sección 7: Efectos secundarios con useEffect -->
+    <div class="section" id="useEffect">
+        <h2>07. Efectos secundarios con useEffect</h2>
+        <p><strong>Definición:</strong> <code>useEffect</code> permite ejecutar efectos secundarios en un componente: peticiones HTTP, suscripciones, manipulación del DOM, timers, etc. Reemplaza los métodos <code>componentDidMount</code>, <code>componentDidUpdate</code> y <code>componentWillUnmount</code> de las clases.</p>
+        <p><strong>Sintaxis básica:</strong></p>
+        <pre><code>
+useEffect(() => {
+  // Efecto
+  return () => {
+    // Limpieza (opcional)
+  };
+}, [dependencias]);
+        </code></pre>
+        <p><strong>Tipos de dependencias:</strong></p>
+        <ul>
+            <li>Sin dependencias: se ejecuta tras cada renderizado.</li>
+            <li><code>[]</code>: solo una vez al montar el componente.</li>
+            <li><code>[x, y]</code>: cuando cambian esas variables.</li>
+        </ul>
+        <p><strong>Ejemplo con document.title:</strong></p>
+        <pre><code>
+useEffect(() => {
+  document.title = `Has hecho clic ${contador} veces`;
+}, [contador]);
+        </code></pre>
+        <p><strong>Limpieza:</strong></p>
+        <pre><code>
+useEffect(() => {
+  const intervalo = setInterval(() => console.log("tick"), 1000);
+  return () => clearInterval(intervalo); // Evita fugas
+}, []);
+        </code></pre>
+        <p><strong>Usos típicos:</strong></p>
+        <ul>
+            <li>Fetch de datos desde una API</li>
+            <li>Suscripción a sockets o eventos</li>
+            <li>Interacción con localStorage</li>
+            <li>Temporizadores, animaciones, etc.</li>
+        </ul>
+        <p><strong>Consideraciones importantes:</strong></p>
+        <ul>
+            <li>Incluye todas las dependencias necesarias en el array.</li>
+            <li>Devuelve una función de limpieza si usas recursos externos.</li>
+            <li>Usa <code>AbortController</code> para cancelar peticiones fetch.</li>
+            <li>Evita efectos innecesarios para no sobrecargar el renderizado.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 8: Peticiones a APIs -->
+    <div class="section" id="api-requests">
+        <h2>08. Peticiones a APIs</h2>
+        <p><strong>Definición:</strong> Las peticiones a APIs permiten que la aplicación React obtenga o envíe datos a servidores. Se realizan normalmente desde <code>useEffect</code>.</p>
+        <p><strong>Con fetch:</strong></p>
+        <pre><code>
+useEffect(() => {
+  fetch("https://api.example.com/users")
+    .then(res => res.json())
+    .then(data => setUsuarios(data))
+    .catch(error => console.error(error));
+}, []);
+        </code></pre>
+        <p><strong>Con axios:</strong></p>
+        <pre><code>
+import axios from 'axios';
+
+useEffect(() => {
+  axios.get("https://api.example.com/users")
+    .then(response => setUsuarios(response.data))
+    .catch(error => console.error(error));
+}, []);
+        </code></pre>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Maneja estados de carga (<code>loading</code>) y error (<code>error</code>).</li>
+            <li>Cancela peticiones si el componente se desmonta (<code>AbortController</code>).</li>
+            <li>Evita peticiones duplicadas (usa memoización si es necesario).</li>
+        </ul>
+    </div>
+
+    <!-- Sección 9: Referencias y persistencia con useRef -->
+    <div class="section" id="useRef">
+        <h2>09. Referencias y persistencia con useRef</h2>
+        <p><strong>Definición:</strong> <code>useRef</code> permite crear una referencia mutable que persiste entre renderizados. Es útil para acceder a elementos del DOM o almacenar valores que no deben provocar re-renderizados.</p>
+        <p><strong>Ejemplo:</strong></p>
+        <pre><code>
+const inputRef = useRef(null);
+
+&lt;input ref={inputRef} /&gt;
+&lt;button onClick={() => inputRef.current.focus()}&gt;Enfocar&lt;/button&gt;
+        </code></pre>
+        <p><strong>Casos de uso:</strong></p>
+        <ul>
+            <li>Controlar el foco de un input.</li>
+            <li>Guardar valores anteriores.</li>
+            <li>Integración con bibliotecas externas que requieren acceso directo al DOM.</li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Cambiar el valor de <code>.current</code> no provoca renderizado.</li>
+            <li>No se debe abusar para almacenar estado reactivo.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 10: Contexto global con useContext -->
+    <div class="section" id="useContext">
+        <h2>10. Contexto global con useContext</h2>
+        <p><strong>Definición:</strong> <code>useContext</code> es un hook que permite acceder al valor de un contexto de React dentro de un componente funcional, sin necesidad de pasar props manualmente a través de múltiples niveles.</p>
+        <p><strong>Sintaxis:</strong></p>
+        <pre><code>
+const MiContexto = React.createContext(valorPorDefecto);
+
+&lt;MiContexto.Provider value={valorCompartido}&gt;
+  &lt;MiComponente /&gt;
+&lt;/MiContexto.Provider&gt;
+
+const valor = useContext(MiContexto);
+        </code></pre>
+        <p><strong>Casos de uso típicos:</strong></p>
+        <ul>
+            <li>Tema de la aplicación (modo claro/oscuro).</li>
+            <li>Idioma de la interfaz (i18n).</li>
+            <li>Información del usuario autenticado.</li>
+            <li>Configuraciones globales (por ejemplo, preferencias de usuario).</li>
+        </ul>
+        <p><strong>Ejemplo práctico:</strong></p>
+        <pre><code>
+import React, { createContext, useContext } from 'react';
+
+const TemaContexto = createContext("claro");
+
+function Encabezado() {
+  const tema = useContext(TemaContexto);
+  return &lt;h1&gt;Modo actual: {tema}&lt;/h1&gt;;
+}
+
+function App() {
+  return (
+    &lt;TemaContexto.Provider value="oscuro"&gt;
+      &lt;Encabezado /&gt;
+    &lt;/TemaContexto.Provider&gt;
+  );
+}
+        </code></pre>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Re-renderizado automático: Cuando el valor del contexto cambia, todos los componentes que lo consumen se renderizan de nuevo.</li>
+            <li>Evitar sobreuso: No usar contexto para datos que cambian frecuentemente (como inputs).</li>
+            <li>Divide por dominios: Crea múltiples contextos especializados en lugar de uno general.</li>
+            <li>Combinar con useReducer: Excelente patrón para manejar estados globales con lógica compleja.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 11: Navegación con React Router -->
+    <div class="section" id="router">
+        <h2>11. Navegación con React Router</h2>
+        <p><strong>Definición:</strong> <code>react-router-dom</code> es la librería estándar de enrutamiento para React. Permite crear aplicaciones de una sola página (SPA) con múltiples rutas.</p>
+        <p><strong>Ejemplo de rutas:</strong></p>
+        <pre><code>
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+&lt;BrowserRouter&gt;
+  &lt;Routes&gt;
+    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+    &lt;Route path="/perfil/:id" element={&lt;Perfil /&gt;} /&gt;
+    &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+  &lt;/Routes&gt;
+&lt;/BrowserRouter&gt;
+        </code></pre>
+        <p><strong>Características:</strong></p>
+        <ul>
+            <li>Navegación entre páginas sin recargar la aplicación.</li>
+            <li>Rutas dinámicas con parámetros (<code>/producto/:id</code>).</li>
+            <li>Rutas protegidas para autenticar usuarios.</li>
+            <li>Redirecciones con <code>&lt;Navigate /&gt;</code>.</li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Usa <code>useParams</code> para acceder a parámetros dinámicos.</li>
+            <li>Implementa rutas <code>*</code> para manejar errores 404.</li>
+            <li>Asegúrate de encapsular las rutas con <code>&lt;BrowserRouter&gt;</code> en la raíz.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 12: Parámetros de ruta con useParams -->
+    <div class="section" id="useParams">
+        <h2>12. Parámetros de ruta con useParams</h2>
+        <p><strong>Definición:</strong> <code>useParams</code> es un hook de <code>react-router-dom</code> que permite acceder a los parámetros dinámicos definidos en las rutas.</p>
+        <p><strong>Ejemplo:</strong></p>
+        <pre><code>
+&lt;Route path="/usuario/:id" element={&lt;Perfil /&gt;} /&gt;
+
+const { id } = useParams();
+        </code></pre>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Ideal para cargar datos basados en la URL.</li>
+            <li>Valida siempre los parámetros antes de usarlos.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 13: Estados complejos con useReducer -->
+    <div class="section" id="useReducer">
+        <h2>13. Estados complejos con useReducer</h2>
+        <p><strong>Definición:</strong> <code>useReducer</code> es un hook que permite manejar estados complejos en componentes funcionales, utilizando el patrón reducer muy conocido en bibliotecas como Redux. Es una alternativa a <code>useState</code> cuando:</p>
+        <ul>
+            <li>El estado tiene una estructura compleja (objetos anidados, múltiples propiedades).</li>
+            <li>Las actualizaciones de estado dependen del valor anterior.</li>
+            <li>Hay múltiples acciones que modifican el mismo estado.</li>
+        </ul>
+        <p><strong>Sintaxis básica:</strong></p>
+        <pre><code>const [state, dispatch] = useReducer(reducer, estadoInicial);</code></pre>
+        <p><strong>Ejemplo de reducer:</strong></p>
+        <pre><code>
+function reducer(state, action) {
+  switch (action.type) {
+    case 'incrementar':
+      return { contador: state.contador + 1 };
+    case 'decrementar':
+      return { contador: state.contador - 1 };
+    default:
+      return state;
+  }
+}
+        </code></pre>
+        <p><strong>Ejemplo completo:</strong></p>
+        <pre><code>
+import React, { useReducer } from 'react';
+
+const estadoInicial = { contador: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'incrementar':
+      return { contador: state.contador + 1 };
+    case 'decrementar':
+      return { contador: state.contador - 1 };
+    default:
+      return state;
+  }
+}
+
+function ContadorReducer() {
+  const [state, dispatch] = useReducer(reducer, estadoInicial);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Contador: {state.contador}&lt;/h2&gt;
+      &lt;button onClick={() => dispatch({ type: 'incrementar' })}&gt;+&lt;/button&gt;
+      &lt;button onClick={() => dispatch({ type: 'decrementar' })}&gt;-&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+        </code></pre>
+        <p><strong>Casos de uso típicos:</strong></p>
+        <ul>
+            <li>Formularios con múltiples campos.</li>
+            <li>Carritos de compra (añadir, eliminar, actualizar productos).</li>
+            <li>Sistemas de navegación por pasos (wizard).</li>
+            <li>Gestión de flujos de autenticación.</li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Reducer como función pura: No debe modificar el estado original (inmutabilidad) ni realizar efectos secundarios (fetch, logs, etc.).</li>
+            <li>Desacoplamiento: La lógica del estado queda centralizada y separada del componente.</li>
+            <li>Escalabilidad: Ideal para estructuras de estado que crecen con el tiempo.</li>
+            <li>Testabilidad: Fácil de testear con tests unitarios al ser funciones puras.</li>
+            <li>Combinar con contextos: Se puede combinar con <code>useContext</code> para manejar estado global compartido entre componentes.</li>
+        </ul>
+    </div>
+
+    <!-- Sección 14: Persistencia con localStorage y sessionStorage -->
+    <div class="section" id="storage">
+        <h2>14. Persistencia con localStorage y sessionStorage</h2>
+        <p><strong>Definición:</strong> <code>localStorage</code> y <code>sessionStorage</code> son APIs del navegador para guardar información en el cliente.</p>
+        <p><strong>Sintaxis:</strong></p>
+        <pre><code>
+localStorage.setItem("clave", "valor");
+localStorage.getItem("clave");
+localStorage.removeItem("clave");
+sessionStorage.setItem("clave", "valor");
+        </code></pre>
+        <p><strong>Diferencias:</strong></p>
+        <ul>
+            <li><code>localStorage</code>: persiste tras cerrar el navegador.</li>
+            <li><code>sessionStorage</code>: se borra al cerrar la pestaña.</li>
+        </ul>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>No almacenar datos sensibles (contraseñas, tokens).</li>
+            <li>Convertir los objetos a JSON:</li>
+        </ul>
+        <pre><code>
+localStorage.setItem("usuario", JSON.stringify(usuario));
+JSON.parse(localStorage.getItem("usuario"));
+        </code></pre>
+    </div>
+
+    <!-- Sección 15: Introducción a React con TypeScript -->
+    <div class="section" id="tsx">
+        <h2>15. Introducción a React con TypeScript</h2>
+        <p><strong>Definición:</strong> TSX es JSX con soporte para TypeScript, lo que añade tipado estático a tus componentes React.</p>
+        <p><strong>Ventajas:</strong></p>
+        <ul>
+            <li>Autocompletado en editores.</li>
+            <li>Validación de tipos en tiempo de compilación.</li>
+            <li>Menor cantidad de bugs en producción.</li>
+        </ul>
+        <p><strong>Ejemplo de tipos:</strong></p>
+        <pre><code>
+interface Props {
+  nombre: string;
+  edad?: number;
+}
+
+const Saludo: React.FC&lt;Props&gt; = ({ nombre, edad }) => (
+  &lt;p&gt;Hola {nombre}, edad: {edad}&lt;/p&gt;
+);
+        </code></pre>
+        <p><strong>Consideraciones:</strong></p>
+        <ul>
+            <li>Se requiere <code>tsconfig.json</code> y configurar el entorno adecuadamente.</li>
+            <li>La curva de aprendizaje es mayor, pero se gana en robustez.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
