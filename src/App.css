@@ -66,6 +66,45 @@ button:active {
   background-color: #004085;
 }
 
+/* Estilos uniformes para todos los elementos de formulario */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  height: 42px;
+  line-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  margin: 8px; /* Espaciado uniforme vertical y horizontal */
+}
+
+/* Estilo visual al enfocar (focus) */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Ajuste especial para textarea */
+textarea {
+  height: auto;
+  min-height: 42px;
+  resize: vertical;
+}
+
+
 /* Contenedores */
 /*
 div {
@@ -100,25 +139,34 @@ nav {
   border-radius: 5px;
   margin-bottom: 20px;
   text-align: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 nav a {
   color: #fff;
-  padding: 10px 15px;
-  margin: 0 5px;
+  padding: 5px 10px;
   font-weight: bold;
   text-transform: uppercase;
   transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  white-space: nowrap; /* Evita corte de texto en varias líneas */
 }
 
 nav a:hover {
   background-color: #495057;
   color: #f8f9fa;
+  border-color: #6c757d;
 }
 
 /* Mensajes de carga */
 p {
   margin-bottom: 10px;
-  color: #6c757d;
-  font-style: italic;
+  /* color: #6c757d;
+  font-style: italic; */
 }

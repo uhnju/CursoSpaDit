@@ -1,291 +1,286 @@
 import React, { useState } from "react";
 
 /********************************************
- * ESCENARIO 1: Lista simple de strings
- *******************************************/
+ * ESCENARIO 1: Lista simple de cadenas de texto
+ *******************************************/
 // Este ejemplo muestra una lista básica de elementos tipo string.
 // Se usa `map` para recorrer el array y generar un <li> por cada elemento.
 
-const SimpleList = () => {
- const items = ["Manzana", "Banana", "Cereza", "Durazno"];
+const ListaSimple = () => {
+  const frutas = ["Manzana", "Banana", "Cereza", "Melocotón"];
 
- return (
-  <ul>
-   {items.map((item, index) => (
-    <li key={index}>{item}</li>
-   ))}
-  </ul>
- );
+  return (
+    <ul>
+      {frutas.map((fruta, index) => (
+        <li key={index}>{fruta}</li>
+      ))}
+    </ul>
+  );
 };
 
 /********************************************
- * ESCENARIO 2: Lista de objetos
- *******************************************/
+ * ESCENARIO 2: Lista de objetos
+ *******************************************/
 // En este caso renderizamos una lista de usuarios (objetos).
 // Se recomienda usar una propiedad única (como `id`) como `key` en el mapeo.
 
-const ObjectList = () => {
- const users = [
-  { id: 1, name: "Juan" },
-  { id: 2, name: "María" },
-  { id: 3, name: "Carlos" },
- ];
+const ListaObjetos = () => {
+  const usuarios = [
+    { id: 1, nombre: "Juan" },
+    { id: 2, nombre: "María" },
+    { id: 3, nombre: "Carlos" },
+  ];
 
- return (
-  <ul>
-   {users.map((user) => (
-    <li key={user.id}>{user.name}</li>
-   ))}
-  </ul>
- );
+  return (
+    <ul>
+      {usuarios.map((usuario) => (
+        <li key={usuario.id}>{usuario.nombre}</li>
+      ))}
+    </ul>
+  );
 };
 
 /********************************************
- * ESCENARIO 3: Lista condicional
- *******************************************/
+ * ESCENARIO 3: Lista condicional
+ *******************************************/
 // Este ejemplo muestra una lista solo si contiene elementos.
 // Si el array está vacío, se muestra un mensaje alternativo.
 
-const ConditionalList = () => {
- const items = ["Elemento 1", "Elemento 2", "Elemento 3"];
+const ListaCondicional = () => {
+  const elementos = ["Elemento 1", "Elemento 2", "Elemento 3"];
 
- return (
-  <div>
-   {items.length > 0 ? (
-    <ul>
-     {items.map((item, index) => (
-      <li key={index}>{item}</li>
-     ))}
-    </ul>
-   ) : (
-    <p>No hay elementos en la lista</p>
-   )}
-  </div>
- );
+  return (
+    <div>
+      {elementos.length > 0 ? (
+        <ul>
+          {elementos.map((elemento, index) => (
+            <li key={index}>{elemento}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No hay elementos en la lista</p>
+      )}
+    </div>
+  );
 };
 
-
 /********************************************
- * ESCENARIO 4: Estilos condicionales por índice
- *******************************************/
+ * ESCENARIO 4: Estilos condicionales por índice
+ *******************************************/
 // Aquí alternamos el estilo de cada elemento según su posición en la lista.
 // En este caso, los elementos en posiciones pares se muestran en negrita.
 
-const StyledList = () => {
- const items = ["Manzana", "Pera", "Uva", "Mango", "Naranja"];
+const ListaConEstilos = () => {
+  const frutas = ["Manzana", "Pera", "Uva", "Mango", "Naranja"];
 
- return (
-  <ul>
-   {items.map((item, index) => (
-    <li key={index} style={{ fontWeight: index % 2 === 0 ? "bold" : "normal" }}>
-     {item}
-    </li>
-   ))}
-  </ul>
- );
+  return (
+    <ul>
+      {frutas.map((fruta, index) => (
+        <li key={index} style={{ fontWeight: index % 2 === 0 ? "bold" : "normal" }}>
+          {fruta}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
-
 /********************************************
- * ESCENARIO 5: Lista dinámica (añadir elementos)
- *******************************************/
+ * ESCENARIO 5: Lista dinámica (añadir elementos)
+ *******************************************/
 // Se puede agregar elementos dinámicamente al hacer clic en un botón.
 // Se utiliza el operador spread (`...`) para añadir nuevos valores al array.
 
-const DynamicList = () => {
- const [items, setItems] = useState(["Elemento 1"]);
+const ListaDinamica = () => {
+  const [elementos, setElementos] = useState(["Elemento 1"]);
 
- const addItem = () => {
-  setItems([...items, `Elemento ${items.length + 1}`]);
- };
+  const añadirElemento = () => {
+    setElementos([...elementos, `Elemento ${elementos.length + 1}`]);
+  };
 
- return (
-  <div>
-   <button onClick={addItem}>Agregar Elemento</button>
-   <ul>
-    {items.map((item, index) => (
-     <li key={index}>{item}</li>
-    ))}
-   </ul>
-  </div>
- );
+  return (
+    <div>
+      <button onClick={añadirElemento}>Añadir Elemento</button>
+      <ul>
+        {elementos.map((elemento, index) => (
+          <li key={index}>{elemento}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 /********************************************
- * ESCENARIO 6: Lista con opción de eliminar
- *******************************************/
+ * ESCENARIO 6: Lista con opción de eliminar
+ *******************************************/
 // Se muestra cómo eliminar elementos individuales de una lista.
 // Cada botón elimina el elemento correspondiente al índice que representa.
 
-const RemovableList = () => {
- const [items, setItems] = useState(["Elemento 1", "Elemento 2", "Elemento 3"]);
+const ListaConEliminacion = () => {
+  const [elementos, setElementos] = useState(["Elemento 1", "Elemento 2", "Elemento 3"]);
 
- const removeItem = (index) => {
-  setItems(items.filter((_, i) => i !== index));
- };
+  const eliminarElemento = (indiceAEliminar) => {
+    setElementos(elementos.filter((_, indice) => indice !== indiceAEliminar));
+  };
 
- return (
-  <ul>
-   {items.map((item, index) => (
-    <li key={index}>
-     {item} <button onClick={() => removeItem(index)}>Eliminar</button>
-    </li>
-   ))}
-  </ul>
- );
+  return (
+    <ul>
+      {elementos.map((elemento, index) => (
+        <li key={index}>
+          {elemento} <button onClick={() => eliminarElemento(index)}>Eliminar</button>
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 /********************************************
- * ESCENARIO 7: Lista ordenada al renderizar
- *******************************************/
+ * ESCENARIO 7: Lista ordenada al renderizar
+ *******************************************/
 // Se ordena la lista alfabéticamente antes de renderizarla.
 // Es importante usar `.slice()` para no modificar el array original.
 
-const SortedList = () => {
- const items = ["Manzana", "Banana", "Cereza", "Durazno"];
+const ListaOrdenada = () => {
+  const frutas = ["Manzana", "Banana", "Cereza", "Melocotón"];
 
- return (
-  <ul>
-   {items
-    .slice()
-    .sort()
-    .map((item, index) => (
-     <li key={index}>{item}</li>
-    ))}
-  </ul>
- );
+  return (
+    <ul>
+      {frutas
+        .slice()
+        .sort()
+        .map((fruta, index) => (
+          <li key={index}>{fruta}</li>
+        ))}
+    </ul>
+  );
 };
 
 /********************************************
- * ESCENARIO 8: Lista con ordenación
- *******************************************/
-// Este ejemplo muestra cómo ordenar una lista basado en una propiedad.
+ * ESCENARIO 8: Lista con ordenación por propiedad
+ *******************************************/
+// Este ejemplo muestra cómo ordenar una lista basada en una propiedad.
 // Es útil cuando necesitas mostrar los elementos en un orden específico.
 
-const SortedListExample = () => {
- const fruits = [
-  { name: "Manzana", price: 1.5 },
-  { name: "Banana", price: 0.5 },
-  { name: "Naranja", price: 1.0 },
- ];
+const ListaOrdenadaPorPropiedad = () => {
+  const frutas = [
+    { nombre: "Manzana", precio: 1.5 },
+    { nombre: "Banana", precio: 0.5 },
+    { nombre: "Naranja", precio: 1.0 },
+  ];
 
- // const sortedFruits = fruits.sort((a, b) => a.price - b.price);
- const sortedFruits = fruits.toSorted((a, b) => a.price - b.price);
+  const frutasOrdenadas = frutas.toSorted((a, b) => a.precio - b.precio);
 
- return (
-  <ul>
-   {sortedFruits.map((fruit, index) => (
-    <li key={index}>
-     {fruit.name} - ${fruit.price}
-    </li>
-   ))}
-  </ul>
- );
+  return (
+    <ul>
+      {frutasOrdenadas.map((fruta, index) => (
+        <li key={index}>
+          {fruta.nombre} - €{fruta.precio}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
-
 /********************************************
- * ESCENARIO 9: Filtrado de una lista (números pares)
- *******************************************/
+ * ESCENARIO 9: Filtrado de lista (números pares)
+ *******************************************/
 // Este componente filtra los elementos del array original antes de mostrarlos.
 // Solo se renderizan los números pares mediante `filter`.
 
-const FilteredList = () => {
- const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const ListaFiltradaNumeros = () => {
+  const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
- return (
-  <ul>
-   {numbers
-    .filter((num) => num % 2 === 0)
-    .map((num, index) => (
-     <li key={index}>{num}</li>
-    ))}
-  </ul>
- );
+  return (
+    <ul>
+      {numeros
+        .filter((n) => n % 2 === 0)
+        .map((n, index) => (
+          <li key={index}>{n}</li>
+        ))}
+    </ul>
+  );
 };
 
 /********************************************
- * ESCENARIO 10: Lista con filtrado
- *******************************************/
-// Este ejemplo muestra cómo filtrar una lista basado en una condición.
-// Es útil cuando necesitas mostrar solo ciertos elementos de la lista.
+ * ESCENARIO 10: Lista con campo de búsqueda
+ *******************************************/
+// Este ejemplo muestra cómo filtrar una lista basado en texto introducido por el usuario.
 
-const FilteredListExample = () => {
- const fruits = ["Manzana", "Banana", "Naranja", "Uva", "Kiwi"];
- const [filter, setFilter] = useState("");
+const ListaConFiltro = () => {
+  const frutas = ["Manzana", "Banana", "Naranja", "Uva", "Kiwi"];
+  const [filtro, setFiltro] = useState("");
 
- const filteredFruits = fruits.filter((fruit) =>
-  fruit.toLowerCase().includes(filter.toLowerCase())
- );
+  const frutasFiltradas = frutas.filter((fruta) =>
+    fruta.toLowerCase().includes(filtro.toLowerCase())
+  );
 
- return (
-  <div>
-   <input
-    type="text"
-    value={filter}
-    onChange={(e) => setFilter(e.target.value)}
-    placeholder="Filtrar frutas"
-   />
-   <ul>
-    {filteredFruits.map((fruit, index) => (
-     <li key={index}>{fruit}</li>
-    ))}
-   </ul>
-  </div>
- );
+  return (
+    <div>
+      <input
+        type="text"
+        value={filtro}
+        onChange={(e) => setFiltro(e.target.value)}
+        placeholder="Filtrar frutas"
+      />
+      <ul>
+        {frutasFiltradas.map((fruta, index) => (
+          <li key={index}>{fruta}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 /********************************************
- * ESCENARIO 11: Lista con datos asíncronos (fetch)
- *******************************************/
+ * ESCENARIO 11: Lista con datos asíncronos (fetch)
+ *******************************************/
 // Se simula una llamada a una API para obtener una lista de tareas.
-// Se usa `useState` para manejar tanto los datos como el estado de carga (`loading`).
+// Se usa `useState` para manejar tanto los datos como el estado de carga (`cargando`).
 
-const AsyncList = () => {
- const [data, setData] = useState([]);
- const [loading, setLoading] = useState(false);
+const ListaAsincrona = () => {
+  const [datos, setDatos] = useState([]);
+  const [cargando, setCargando] = useState(false);
 
- const fetchData = async () => {
-  setLoading(true);
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5");
-  const result = await response.json();
-  setData(result);
-  setLoading(false);
- };
+  const obtenerDatos = async () => {
+    setCargando(true);
+    const respuesta = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5");
+    const resultado = await respuesta.json();
+    setDatos(resultado);
+    setCargando(false);
+  };
 
- return (
-  <div>
-   <button onClick={fetchData}>Cargar Datos</button>
-   {loading ? (
-    <p>Cargando...</p>
-   ) : (
-    <ul>{data.map((item) => <li key={item.id}>{item.title}</li>)}</ul>
-   )}
-  </div>
- );
+  return (
+    <div>
+      <button onClick={obtenerDatos}>Cargar Datos</button>
+      {cargando ? (
+        <p>Cargando...</p>
+      ) : (
+        <ul>{datos.map((tarea) => <li key={tarea.id}>{tarea.title}</li>)}</ul>
+      )}
+    </div>
+  );
 };
 
 /********************************************
- * COMPONENTE PRINCIPAL: Muestra todos los escenarios
- *******************************************/
+ * COMPONENTE PRINCIPAL: Muestra todos los escenarios
+ *******************************************/
 // Este componente agrupa todos los ejemplos de listas en una única vista.
 // Cada uno demuestra una técnica diferente de renderizado, filtrado o gestión de listas.
 
 const EjemplosRenderizadoListas = () => (
- <div className="p-6 space-y-6">
-  <h1 className="text-2xl font-bold">Ejemplos de renderizado de listas en React</h1>
-  <SimpleList />     {/* ESCENARIO 1: Lista simple */}
-  <ObjectList />     {/* ESCENARIO 2: Lista de objetos */}
-  <ConditionalList />  {/* ESCENARIO 3: Lista condicional */}
-  <StyledList />     {/* ESCENARIO 4: Estilos condicionales */}
-  <DynamicList />    {/* ESCENARIO 5: Lista dinámica (añadir elementos) */}
-  <RemovableList />   {/* ESCENARIO 6: Lista con opción de eliminar */}
-  <SortedList />     {/* ESCENARIO 7: Lista ordenada */}
-  <SortedListExample /> {/* ESCENARIO 8: Lista con ordenación */}
-  <FilteredList />    {/* ESCENARIO 9: Filtrado de una lista (números pares) */}
-  <FilteredListExample /> {/* ESCENARIO 10: Lista con campo de filtro */}
-  <AsyncList />     {/* ESCENARIO 11: Cargar lista con fetch */}
- </div>
+  <>
+    <h1>Ejemplos de renderizado de listas</h1>
+    <ListaSimple />                 {/* ESCENARIO 1 */}
+    <ListaObjetos />               {/* ESCENARIO 2 */}
+    <ListaCondicional />           {/* ESCENARIO 3 */}
+    <ListaConEstilos />            {/* ESCENARIO 4 */}
+    <ListaDinamica />              {/* ESCENARIO 5 */}
+    <ListaConEliminacion />        {/* ESCENARIO 6 */}
+    <ListaOrdenada />              {/* ESCENARIO 7 */}
+    <ListaOrdenadaPorPropiedad />  {/* ESCENARIO 8 */}
+    <ListaFiltradaNumeros />       {/* ESCENARIO 9 */}
+    <ListaConFiltro />             {/* ESCENARIO 10 */}
+    <ListaAsincrona />             {/* ESCENARIO 11 */}
+  </>
 );
-export default EjemplosRenderizadoListas;
 
+export default EjemplosRenderizadoListas;
