@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 /********************************************
  * ESCENARIO 1: Guardar datos en localStorage
  *******************************************/
-// Este ejemplo muestra cómo guardar datos en `localStorage`.
-// Es útil cuando necesitas persistir datos en el navegador incluso después de cerrar la pestaña.
 
 const GuardarEnLocalStorage = () => {
   const guardar = () => {
@@ -18,8 +16,6 @@ const GuardarEnLocalStorage = () => {
 /********************************************
  * ESCENARIO 2: Leer datos de localStorage
  *******************************************/
-// Este ejemplo muestra cómo leer datos de `localStorage`.
-// Es útil cuando necesitas recuperar datos previamente guardados.
 
 const LeerDeLocalStorage = () => {
   const [nombre, setNombre] = useState("");
@@ -44,8 +40,6 @@ const LeerDeLocalStorage = () => {
 /********************************************
  * ESCENARIO 3: Eliminar datos de localStorage
  *******************************************/
-// Este ejemplo muestra cómo eliminar datos de `localStorage`.
-// Es útil cuando necesitas borrar datos específicos del almacenamiento.
 
 const EliminarDeLocalStorage = () => {
   const eliminar = () => {
@@ -59,8 +53,6 @@ const EliminarDeLocalStorage = () => {
 /********************************************
  * ESCENARIO 4: Limpiar todo el localStorage
  *******************************************/
-// Este ejemplo muestra cómo limpiar todo el contenido de `localStorage`.
-// Es útil cuando necesitas borrar todos los datos almacenados.
 
 const LimpiarLocalStorage = () => {
   const limpiar = () => {
@@ -74,8 +66,6 @@ const LimpiarLocalStorage = () => {
 /********************************************
  * ESCENARIO 5: Sincronizar estado con localStorage
  *******************************************/
-// Este ejemplo muestra cómo sincronizar el estado de un componente con `localStorage`.
-// Es útil cuando necesitas mantener el estado persistente entre recargas de la página.
 
 const SincronizarConLocalStorage = () => {
   const [nombre, setNombre] = useState(localStorage.getItem("nombre") || "");
@@ -100,12 +90,10 @@ const SincronizarConLocalStorage = () => {
 /********************************************
  * ESCENARIO 6: Almacenamiento de JSON
  *******************************************/
-// Guardamos y recuperamos un objeto (usuario) usando JSON.stringify y JSON.parse.
-// localStorage solo puede guardar strings, por lo que hay que convertir.
 
 const AlmacenarJSONEnLocalStorage = () => {
   const [usuario, setUsuario] = useState(() => {
-    return JSON.parse(localStorage.getItem("usuario")) || { nombre: "", edad: "" };
+    return JSON.parse(localStorage.getItem("usuario") || "{ nombre: '', edad: '' }");
   });
 
   useEffect(() => {
@@ -135,10 +123,8 @@ const AlmacenarJSONEnLocalStorage = () => {
 /********************************************
  * COMPONENTE PRINCIPAL: Muestra todos los escenarios
  *******************************************/
-// Este componente centraliza todos los ejemplos para que el profesor pueda
-// mostrarlos uno por uno en una única vista. Cada uno está comentado con su número y título.
 
-const EjemplosAlmacenamiento = () => {
+const EjemplosStorage = () => {
   return (
     <>
       <h1>Ejemplos de Almacenamiento</h1>
@@ -152,4 +138,4 @@ const EjemplosAlmacenamiento = () => {
   );
 };
 
-export default EjemplosAlmacenamiento;
+export default EjemplosStorage;

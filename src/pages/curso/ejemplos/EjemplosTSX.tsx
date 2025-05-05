@@ -3,9 +3,6 @@ import React, { useRef, useState } from "react";
 /********************************************
  * ESCENARIO 1: Tipar props simples
  *******************************************/
-// Este ejemplo muestra cómo tipar las propiedades (props) de un componente utilizando una interfaz.
-// La interfaz `SaludoProps` define que el componente `Saludo` debe recibir un nombre (`nombre`) como string
-// y una edad (`edad`) como número. Esto asegura que el componente solo acepte valores válidos.
 
 interface SaludoProps {
   nombre: string;
@@ -18,9 +15,6 @@ const Saludo = ({ nombre, edad }: SaludoProps): JSX.Element => {
 /********************************************
  * ESCENARIO 2: Props opcionales
  *******************************************/
-// Aquí se muestra cómo manejar propiedades opcionales en un componente.
-// La propiedad `mensaje` es opcional, indicada por el signo `?`. Si no se proporciona, el componente
-// mostrará un mensaje predeterminado ("Sin mensaje.").
 
 interface AlertaProps {
   mensaje?: string;
@@ -32,9 +26,6 @@ const Alerta = ({ mensaje }: AlertaProps): JSX.Element => {
 /********************************************
  * ESCENARIO 3: Tipar children con React.ReactNode
  *******************************************/
-// Este ejemplo utiliza la propiedad especial `children`, que se tipa con `React.ReactNode`.
-// Esto permite que el componente `Tarjeta` reciba cualquier contenido válido de React (texto, JSX, otros componentes)
-// y lo renderice dentro de un contenedor.
 
 interface TarjetaProps {
   children: React.ReactNode;
@@ -46,8 +37,6 @@ const Tarjeta = ({ children }: TarjetaProps): JSX.Element => {
 /********************************************
  * ESCENARIO 4: Retorno JSX.Element
  *******************************************/
-// Este ejemplo muestra cómo especificar explícitamente que el retorno de un componente es de tipo `JSX.Element`.
-// Esto asegura que el componente siempre devuelva un elemento válido de React.
 
 const PieDePagina = (): JSX.Element => {
   return <footer>Aquí va el pié</footer>;
@@ -56,8 +45,6 @@ const PieDePagina = (): JSX.Element => {
 /********************************************
  * ESCENARIO 5: Tipar arrays
  *******************************************/
-// Aquí se muestra cómo tipar un array de strings utilizando `string[]`.
-// El componente `Lista` recibe un array de elementos y los renderiza como una lista (`<ul>`).
 
 interface ListaProps {
   elementos: string[];
@@ -75,8 +62,6 @@ const Lista = ({ elementos }: ListaProps): JSX.Element => {
 /********************************************
  * ESCENARIO 6: Tipar eventos
  *******************************************/
-// Este ejemplo muestra cómo tipar eventos en React. En este caso, el evento de clic (`onClick`)
-// se tipa como `React.MouseEvent<HTMLButtonElement>`, lo que asegura que el evento sea manejado correctamente.
 
 const Boton = (): JSX.Element => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -89,7 +74,6 @@ const Boton = (): JSX.Element => {
 /********************************************
  * ESCENARIO 7: Tipar objetos complejos
  *******************************************/
-// Este ejemplo utiliza una interfaz anidada (`Usuario`) para definir un objeto complejo como propiedad.
 
 interface Usuario {
   id: number;
@@ -105,7 +89,6 @@ const Perfil = ({ usuario }: PerfilProps): JSX.Element => {
 /********************************************
  * ESCENARIO 8: Props genéricas (básico)
  *******************************************/
-// Este ejemplo utiliza un tipo genérico `<T>` para aceptar cualquier tipo de dato como propiedad `valor`.
 
 interface ElementoProps<T> {
   valor: T;
@@ -117,8 +100,6 @@ const Elemento = <T,>({ valor }: ElementoProps<T>): JSX.Element => {
 /********************************************
  * ESCENARIO 9: Tipar referencias con useRef
  *******************************************/
-// Este ejemplo utiliza el hook `useRef` para crear una referencia a un input.
-// La referencia se tipa como `HTMLInputElement`.
 
 const EnfocarInput = (): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -129,7 +110,6 @@ const EnfocarInput = (): JSX.Element => {
 /********************************************
  * ESCENARIO 10: Tipar estados con useState
  *******************************************/
-// Este ejemplo utiliza el hook `useState` para manejar un estado llamado `contador`.
 
 const Contador = (): JSX.Element => {
   // @ts-ignore
@@ -140,8 +120,6 @@ const Contador = (): JSX.Element => {
 /********************************************
  * COMPONENTE DEMO PARA MOSTRAR TODOS LOS ESCENARIOS
  *******************************************/
-// Este componente principal reúne todos los ejemplos anteriores en un solo lugar.
-// Renderiza cada componente con datos de ejemplo para mostrar cómo funcionan en conjunto.
 
 const EjemplosTSX = (): JSX.Element => {
   return (
