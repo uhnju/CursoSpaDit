@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { Dropdown } from '@dit/spad-rdit_library'
 
 import EjemplosSintaxisJSX from "../pages/curso/ejemplos/EjemplosSintaxisJSX";
@@ -18,13 +18,19 @@ import { NavegarConLink, NavegarConUseNavigate, MostrarUbicacion, LeerSearchPara
 import EjemplosAxios from "../pages/curso/ejemplos/EjemplosAxios";
 
 import EjemploQueryForm from "../pages/curso/queryform/EjemploQueryForm";
+import EjemploQueryDetalle from "../pages/curso/queryform/EjemploQueryDetalle";
 
 import ConsultaEmpleados from "../pages/curso/casopractico/ConsultaEmpleados";
+import DetalleEmpleado from "../pages/curso/casopractico/DetalleEmpleado";
+import NuevoEmpleado from "../pages/curso/casopractico/NuevoEmpleado";
+import ModificarEmpleado from "../pages/curso/casopractico/ModificarEmpleado";
+import EliminarEmpleado from "../pages/curso/casopractico/EliminarEmpleado";
 
 const AppIntraAEAT = () => {
   const navigate = useNavigate()
   return (
     <Suspense fallback={<div>Cargando...</div>}>
+      <span style={{float:"right"}}>{useLocation().pathname.substring(1)}</span>
       <Dropdown title="Curso SpaDit">
         <Dropdown.Item onClick={() => navigate('/EjemplosSintaxisJSX')}>JSX</Dropdown.Item>
         <Dropdown.Item onClick={() => navigate('/EjemplosRenderizadoListas')}>Listas</Dropdown.Item>
@@ -76,8 +82,13 @@ const AppIntraAEAT = () => {
         <Route path="/EjemplosAxios" element={<EjemplosAxios />} />
 
         <Route path="/EjemploQueryForm" element={<EjemploQueryForm />} />
+        <Route path="/EjemploQueryDetalle" element={<EjemploQueryDetalle />} />
 
         <Route path="/ConsultaEmpleados" element={<ConsultaEmpleados />} />
+        <Route path="/DetalleEmpleado" element={<DetalleEmpleado />} />
+        <Route path="/NuevoEmpleado" element={<NuevoEmpleado />} />
+        <Route path="/ModificarEmpleado" element={<ModificarEmpleado />} />
+        <Route path="/EliminarEmpleado" element={<EliminarEmpleado />} />
       </Routes>
 
     </Suspense>
